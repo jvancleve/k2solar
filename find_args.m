@@ -8,8 +8,19 @@
 %INPUTS
 % -full Campaign set of ktwo background poly FITS files
 %OUTPUTS
+% argStruct = 
+%   1×20 struct array with fields:
+%     c
+%     cadenceNos
+%     midTimes
+%     zeroCoeff
+%     medianCalFlux
+%     isArgHere
+%     allChGoodCad
+%     planet
 %NOTES
 % -This takes about 20 min per campaign to run
+% -Add planet gaps with add_planet_gap.m
 %TO-DO list
 %REVISION HISTORY:
 %Engineer      Org            Date      Description
