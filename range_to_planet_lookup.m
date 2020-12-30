@@ -17,11 +17,11 @@
 %J. Van Cleve   Ball Aerospace  09/14/2020    Tidied up for github
 function [range, gapIndicators, startPlanetEvent, endPlanetEvent, planet] = range_to_planet_lookup(argStruct, angleThreshold)
 %range_to_planet(ra0, dec0, ephTimes, ephRa, ephDec, cadTimes)
-dataDir =   '/Volumes/My Passport for Mac/solarSystem/zody';
+dataDir =   '/Volumes/My Passport for Mac/solarSystemArch/zody';
 ephDir =  [dataDir '/ephemeris'];
 c = argStruct.c;
-campaigns = [0 2 3 8 112 12 16 19];
-planets = {'jupiter','mars','neptune','uranus','saturn','mars','earth','neptune'};
+campaigns = [0 2 5 112 12 16];
+planets = {'jupiter','mars','jupiter','saturn','mars','earth'};
 planet = char(planets(campaigns == c));
 if ~length(planet)
     %search for jupiter if nothing else obvious
@@ -65,14 +65,15 @@ if gapIndicators(end)
 end
 figure('Position',[-2000 100 1200 800])
 subplot(2,1,1)
+plot(gapIndicators*angleThreshold*100,'m')
+hold on
+plot(range*100,'g')
+legend('Exclusion Flag','Angle to FOV center*100 (deg)','AutoUpdate','Off')
 plot(argStruct.zeroCoeff)
 grid
-hold on
-plot(gapIndicators*angleThreshold*100,'m')
-plot(range*100,'g')
 s = axis;
 axis([s(1) s(2) 0 2000])
-title(['Planet ' planet ' exclusion for ' sprintf('%02.f',c)],'FontSize',16)
+title(['Planet ' planet ' exclusion for ' sprintf('C%02.f',c)],'FontSize',16)
 ylabel('Zero Coeff')
 xlabel('Relative Cadence Index')
 subplot(2,1,2)
